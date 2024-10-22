@@ -1,0 +1,64 @@
+<div class="container">
+  <div class="col-md-12 encabezado">
+    <h3>Employees List</h3>
+  </div>
+  <div>
+    <hr/>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <label for="employeeId" class="form-label">Employee ID</label>
+    </div>
+    <div class="col-md-3">
+      <input type="text" class="form-control" id="employeeId" [(ngModel)]="employeeId" placeholder="Enter employee ID">
+    </div>
+    <div class="col-md-5 d-flex align-items-start">
+      <button class="btn btn-primary me-2" (click)="searchEmployees()">Search</button>
+    </div>
+    <div class="col-md-4 d-flex align-items-start">
+      <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+    </div>
+  </div>
+  <div>
+    <hr/>
+  </div>
+  <div *ngIf="employees && employees.length > 0" class="table-responsive">
+    <table class="table table-bordered table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>LastName</th>
+          <th>Email</th>
+          <th>ContactNumber</th>
+          <th>Age</th>
+          <th>Salary</th>
+          <th>Address</th>
+          <th>Annual Salary</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let employee of employees">
+          <td>{{ employee.id }}</td>
+          <td>{{ employee.firstName }}</td>
+          <td>{{ employee.lastName }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.contactNumber }}</td>
+          <td>{{ employee.age }}</td>
+          <td>{{ employee.salary | currency: '$': 'symbol': '1.0-0' }}</td>
+          <td>{{ employee.address }}</td>
+          <td>{{ employee.annualSalary | currency: '$': 'symbol': '1.0-0'}} </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    {{ errorMessage }}
+  </div>
+   <div>
+    <hr/>
+  </div>
+</div>
+
+  
+
