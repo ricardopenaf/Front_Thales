@@ -30,13 +30,23 @@ export class EmployeeComponent {
   constructor(private employeeService: EmployeeService) { }
 
   getAllEmployeesOnInit() {
+    this.loading = true;
     this.employeeService.getAllEmployees().subscribe({
       next: (data: Employee[]) => {
-        this.employees = data; 
+        if (data) {
+          this.employees = data;
+        } else {
+          this.employees = [];
+          this.errorMessage = 'No data found!!!';
+        }
+        this.loading = false;
       },
       error: (error) => {
+        this.errorMessage = 'No data found. Please try again or review the connection!!';
         console.error('Error fetching employees:', error);
+        this.loading = false;
       }
+      
     });
   }
   searchEmployees() {
